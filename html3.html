@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caesar Cipher</title>
+</head>
+<body>
+<h2>TUGAS</h2>
+<label for="text">Masukkan Teks:</label>
+<textarea id="text" rows="4" cols="50"></textarea><br><br>
+<label for="shift">Jumlah Shift:</label>
+<input type="number" id="shift" min="1" max="25" value="3"><br><br>
+<button onclick="encrypt()">Enkripsi</button>
+<button onclick="decrypt()">Dekripsi</button><br><br>
+<label for="result">Hasil:</label>
+<textarea id="result" rows="4" cols="50" readonly></textarea>
+
+<script>
+function encrypt() {
+  var text = document.getElementById("text").value;
+  var shift = parseInt(document.getElementById("shift").value);
+  var result = "";
+  for (var i = 0; i < text.length; i++) {
+    var charCode = text.charCodeAt(i);
+    if (charCode >= 65 && charCode <= 90) {
+      result += String.fromCharCode(((charCode - 65 + shift) % 26) + 65);
+    } else if (charCode >= 97 && charCode <= 122) {
+      result += String.fromCharCode(((charCode - 97 + shift) % 26) + 97);
+    } else {
+      result += text.charAt(i);
+    }
+  }
+  document.getElementById("result").value = result;
+}
+
+function decrypt() {
+  var text = document.getElementById("text").value;
+  var shift = parseInt(document.getElementById("shift").value);
+  var result = "";
+  for (var i = 0; i < text.length; i++) {
+    var charCode = text.charCodeAt(i);
+    if (charCode >= 65 && charCode <= 90) {
+      result += String.fromCharCode(((charCode - 65 - shift + 26) % 26) + 65);
+    } else if (charCode >= 97 && charCode <= 122) {
+      result += String.fromCharCode(((charCode - 97 - shift + 26) % 26) + 97);
+    } else {
+      result += text.charAt(i);
+    }
+  }
+  document.getElementById("result").value = result;
+}
+</script>
+</body>
+</html>
